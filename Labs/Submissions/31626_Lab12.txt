@@ -1,0 +1,137 @@
+/*
+EXERCISE 1
+Password Validator
+*/
+
+#include <iostream>
+using namespace std;
+
+bool isValid(string);
+
+int main() {
+    string password;
+    cout << "Enter a password: ";
+    getline(cin, password);
+    cout << "Password is " << (isValid(password) ? "" : "not ") << "valid." << endl;
+}
+
+bool isValid(string password) {
+    if (password.length() < 10)
+        return false;
+
+    int countLetter = 0;
+    int countDigit = 0;
+    for (char character : password) {
+        if (isalpha(character))
+            countLetter++;
+        else if (isdigit(character))
+            countDigit++;
+    }
+
+    return (countLetter + countDigit == password.length() && countDigit >= 2 && countLetter >= 1);
+}
+
+/*
+EXERCISE 2
+Anagram Checker
+*/
+
+#include <cctype>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool isAnagram(string, string);
+
+int main() {
+    string string1, string2;
+    cout << "Enter string 1: ";
+    getline(cin, string1);
+    cout << "Enter string 2: ";
+    getline(cin, string2);
+    cout << "The strings are " << (isAnagram(string1, string2) ? "" : "not ") << "anagrams." << endl;
+}
+
+bool isAnagram(string string1, string string2) {
+    // Remove space characters
+    string1.erase(remove(string1.begin(), string1.end(), ' '), string1.end());
+    string2.erase(remove(string2.begin(), string2.end(), ' '), string2.end());
+
+    // Convert to uppercase
+    transform(string1.begin(), string1.end(), string1.begin(), ::toupper);
+    transform(string2.begin(), string2.end(), string2.begin(), ::toupper);
+
+    // Sort in alphabetical order
+    sort(string1.begin(), string1.end());
+    sort(string2.begin(), string2.end());
+
+    return string1 == string2;
+}
+
+/*
+EXERCISE 4
+Largest Word
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);
+    str += " ";
+
+    string word = "";
+    string maxWord = "";
+    int maxLength = 0;
+
+    for (char c : str) {
+        if (isalpha(c))
+            word += c;
+        else {
+            if (word.length() > maxLength) {
+                maxLength = word.length();
+                maxWord = word;
+            }
+            word = "";
+        }
+    }
+
+    cout << maxWord << endl;
+}
+
+/*
+EXERCISE 5
+Subsequence
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    string str;
+    string substr;
+
+    cout << "Enter a string: ";
+    getline(cin, str);
+
+    cout << "Enter a substring: ";
+    getline(cin, substr);
+
+    cout << "Is subse1 is the subsequence of word1? ";
+
+    size_t i = 0, j = 0;
+
+    while (j < substr.length()) {
+        if (str[i] == substr[j])
+            j++;
+        else
+            i++;
+        if (i >= str.length()) {
+            cout << 0 << endl;
+            return 0;
+        }
+    }
+    cout << 1 << endl;
+}

@@ -1,0 +1,129 @@
+// Exercise 1
+// Prime Numbers
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main() {
+    for (int number=2, count=0; count < 50; number++) {
+        bool prime = true;
+        for (int divisor = 2; divisor <= sqrt(number); divisor++) {
+            if (number % divisor == 0) {
+                prime = false;
+                break;
+            }
+        }
+        if (prime) {
+            cout << setw(4) << number << " ";
+            count++;
+            if (count % 10 == 0) {
+                cout << endl;
+            }
+        }
+    }
+    return 0;
+}
+
+
+
+// Exercise 2
+// Dice Rolling
+
+#include <iostream>
+#include <random>
+#include <ctime>
+using namespace std;
+
+int main() {
+    int number;
+    srand(time(0));
+
+    for (int index = 1; index <= 10; index++) {
+        number = rand() % 6 + 1;
+        cout << "Roll " << index << ": " << number << " - ";
+
+        switch (number) {
+            case 1:
+                cout << "Tough luck! You need to roll better next time." << endl;
+            break;
+            case 6:
+                cout << "Congratulations! You rolled the highest number." << endl;
+            break;
+            default:
+                cout << "You rolled " << number << "." << endl;
+        }
+    }
+    return 0;
+}
+
+
+
+// Exercise 3
+// Star Square
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter an integer n:" << endl;
+    cin >> n;
+    for (int row = 1; row <= n; row++) {
+        for (int col = 1; col <= n; col++) {
+            cout << "*";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+
+
+// Exercise 4
+// Ordinal Numbers
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int count, last_digit, last_two_digits;
+
+    cout << "Enter a number between 1 and 1000:" << endl;
+    cin >> count;
+
+    if (count < 1) {
+        cout << "The number is not positive." << endl;
+    }
+
+    else if (count > 1000) {
+        cout << "You have entered a large number." << endl;
+        return 0;
+    }
+
+    else {
+        for (int i = 1; i <= count; i++) {
+            last_digit = i % 10;
+            last_two_digits = i % 100;
+
+            cout << i;
+
+            if (last_digit == 1 && last_two_digits != 11) {
+                cout << "st";
+            }
+            else if (last_digit == 2 && last_two_digits != 12) {
+                cout << "nd";
+            }
+            else if (last_digit == 3 && last_two_digits != 13) {
+                cout << "rd";
+            }
+            else {
+                cout << "th";
+            }
+            cout << " Hello" << endl;
+        }
+    }
+
+    return 0;
+}

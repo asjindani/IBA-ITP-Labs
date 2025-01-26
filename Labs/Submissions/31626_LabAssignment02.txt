@@ -1,0 +1,155 @@
+/*
+EXERCISE 4
+- Randomly generate 100 lowercase letters
+- Store the letters in an array of characters
+- Display the occurance of each of the letters
+*/
+
+#include <iostream>
+#include <ctime>
+#include <array>
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    const int n = 100;
+    array<char,n> characters;
+    array<int,26> counts;
+
+    // Initialize counts to 0
+    for (int& count : counts)
+        count = 0;
+
+    // Generate and display random characters
+    cout << "Random characters: ";
+    for (int i = 0; i < n; i++) {
+        int number = rand() % 26;
+        counts[number] += 1;
+        char character = char(number+'a');
+        characters[i] = character;
+        cout << character << " ";
+    }
+    cout << endl;
+
+    // Display all character counts
+    cout << "Character counts: ";
+    for (int i = 0; i < 26; i++) {
+        char character = char(i+'a');
+        cout << character << "=" << counts[i] << " ";
+    }
+    cout << endl;
+}
+
+/*
+EXERCISE 5
+- Generate 30 random numbers
+- Display the grade distribution
+*/
+
+#include <iostream>
+#include <array>
+#include <iomanip>
+#include <ctime>
+using namespace std;
+
+int main() {
+    const int n = 30;
+    array<int,n> grades{};
+
+    srand(time(0));
+    
+    // Generate random grades and display them
+    cout << "Grades: ";
+    for (int& grade : grades) {
+        grade = rand() % 101;
+        cout << grade << " ";
+    }
+
+    cout << endl << "Grade distribution:" << endl;
+
+    for (int i = 0; i <= 100; i += 10) {
+        if (i == 0)
+            cout << "  0-9: ";
+        else if (i == 100)
+            cout << "  100: ";
+        else
+            cout << i << "-" << i+9 << ": ";
+
+        for (int grade : grades) {
+            if (grade >= i && grade <= i+9) {
+                cout << "*";
+            }
+        }
+
+        cout << endl;
+    }
+}
+
+/*
+EXERCISE 6
+- Input a number from the user
+- Store each of the digits in an array
+- Ask user if even or odd digits should be displayed
+
+E.g.
+- Number is 8342116
+- Array is {6,1,1,2,4,3,8}
+- Odd numbers output is 311
+*/
+
+#include <iostream>
+#include <array>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int number;
+    bool negative = false;
+    array<unsigned int,10> digits{0};
+
+    cout << "Enter a number: ";
+    cin >> number;
+
+    if (number < 0) {
+        negative = true;
+        number *= -1;
+    }
+
+    size_t n = 0;
+        
+    do {
+        unsigned int digit = number % 10;
+        digits[n] = digit;
+        n++;
+        number /= 10;
+    } while (number > 0);
+
+    cout << "Digits array: ";
+    for (size_t i = 0; i < n; i++)
+        cout << digits[i] << " ";
+    cout << endl;
+
+    int choice;
+    cout << "Do you want even (0) or odd (1): ";
+    cin >> choice;
+
+    while (choice != 0 && choice != 1) {
+        cout << "You can only type 0 or 1, please reenter: ";
+        cin >> choice;
+    }
+    
+    unsigned int place = 1;
+    int result = 0;
+    for (size_t i = 0; i < n; i++) {
+        if (digits[i] % 2 == choice) {
+            result += digits[i] * place;
+            place *= 10;
+        }
+    }
+
+    if (negative)
+        result *= -1;
+
+    cout << result << endl;
+}

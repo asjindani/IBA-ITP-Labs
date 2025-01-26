@@ -1,0 +1,136 @@
+Exercise 1
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int x, y;
+    double distance;
+
+
+    cout << "Enter the x-coordinate:" << endl;
+    cin >> x;
+
+    cout << "Enter the y-coordinate:" << endl;
+    cin >> y;
+
+    distance = sqrt(x*x + y*y);
+    cout << "The euclidean distance from the origin is " << distance << " units.";
+
+    return 0;
+}
+
+
+
+
+
+Exercise 2
+
+#include <iostream>
+#include <ctime>
+
+int main() {
+    int total_seconds, hours, minutes, seconds;
+    time_t present_time;
+
+    present_time = time(NULL);
+
+    std::cout << present_time << " seconds have passed since 00:00 GMT, Jan 1, 1970" << std::endl;
+
+    total_seconds = present_time;
+
+    seconds = total_seconds % 60;
+    minutes = (total_seconds / 60) % 60;
+    hours = (total_seconds / 3600) % 24;
+
+    std::cout << hours+5 << ":" << minutes << ":" << seconds << " (GMT +05:00)";
+
+    return 0;
+}
+
+
+
+
+
+Exercise 3
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    double amount;
+    int remaining_cents, dollars, quarters, dimes, nickles, pennies;
+
+    cout << "Enter the amount in dollars:" << endl;
+
+    cin >> amount;
+
+    remaining_cents = (int) (amount * 100);
+
+    dollars = remaining_cents / 100;
+    remaining_cents = remaining_cents % 100;
+
+    quarters = remaining_cents / 25;
+    remaining_cents = remaining_cents % 25;
+
+    dimes = remaining_cents / 10;
+    remaining_cents = remaining_cents % 10;
+
+    nickles = remaining_cents / 5;
+    remaining_cents = remaining_cents % 5;
+
+    pennies = remaining_cents;
+
+    cout << dollars << " dollars" << endl;
+    cout << quarters << " quarters" << endl;
+    cout << dimes << " dimes" << endl;
+    cout << nickles << " nickles" << endl;
+    cout << pennies << " pennies" << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+Exercise 4
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int number, original_number, reversed_number;
+    int digit1, digit2, digit3, digit4;
+
+    cout << "Enter any 4 digit number:" << endl;
+    cin >> original_number;
+
+    number = original_number;
+
+    digit1 = number / 1000;
+    number = number % 1000;
+
+    digit2 = number / 100;
+    number = number % 100;
+
+    digit3 = number / 10;
+    number = number % 10;
+
+    digit4 = number;
+
+    reversed_number = digit4*1000 + digit3*100 + digit2*10 + digit1;
+
+    if (original_number == reversed_number) {
+        cout << "The number is a palindrome.";
+    } else {
+        cout << "The number is not a palindrome.";
+    }
+
+    cout << endl;
+
+    return 0;
+}

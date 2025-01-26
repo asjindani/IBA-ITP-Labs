@@ -1,0 +1,150 @@
+/*
+TASK 1
+Length of string using pointer
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    size_t n = 100;
+    char str[n];
+    char * strPtr = str;
+    int count = 0;
+
+    cout << "Enter any string (less than " << n << " characters): ";
+    cin.getline(str, n);
+
+    while (*(strPtr++) != '\0')
+        count++;
+
+    cout << "Length of " << str << " is " << count << endl;
+}
+
+/*
+TASK 2
+Copy one string to another using pointer
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    size_t n = 100;
+    
+    char string1[n]{};
+    char string2[n]{};
+
+    char * string1Ptr = string1;
+    char * string2Ptr = string2;
+
+    cout << "Enter any string (less than " << n << " characters): ";
+    cin.getline(string1, n);
+
+    while (*(string1Ptr) != '\0')
+        *(string2Ptr++) = *(string1Ptr++);
+    // *(string2Ptr) = '\0';
+
+    cout << "String 1: " << string1 << endl;
+    cout << "String 2: " << string2 << endl;
+}
+
+/*
+TASK 3
+Count vowels in string using pointer
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    size_t n = 100;
+    char str[n];
+    char * strPtr = str;
+    int count = 0;
+
+    cout << "Enter any string (less than " << n << " characters): ";
+    cin.getline(str, n);
+
+    while (*strPtr != '\0') {
+        char c = *strPtr;
+
+        // Convert to lowercase if uppercase
+        if (c >= 'A' && c <= 'Z')
+            c = c - 'A' + 'a';
+
+        // Check lowercase vowels and count
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+            count++;
+
+        strPtr++;
+    }
+
+    cout << "Count of vowels in " << str << " is " << count << endl;
+}
+
+/*
+TASK 4
+Print all elements in integer array using pointer
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    size_t n = 10;
+    int numbers[n] {1,2,3,4,5,6,7,8,9,10};
+    int* pointer = numbers;
+
+    for (size_t i = 0; i < n; i++)
+        cout << *pointer++ << ' ';
+    cout << endl;
+}
+
+/*
+TASK 5
+Function to swap two integers using pointers
+*/
+
+#include <iostream>
+using namespace std;
+
+void swap(int* x, int* y);
+
+int main() {
+    int a = 10;
+    int b = 20;
+    swap(a, b);
+    cout << a << endl;
+    cout << b << endl;
+}
+
+void swap(int* x, int* y) {
+    *x = *x + *y;
+    *y = *x - *y;
+    *x = *x - *y;
+}
+
+/*
+TASK 6
+Function to take array, size, threshold and count elements greater than threshold
+*/
+
+#include <iostream>
+using namespace std;
+
+int countGreaterThan(int* arr, size_t size, int threshold);
+
+int main() {
+    int size = 5;
+    int arr[size] {4,10,20,50,100};
+    cout << countGreaterThan(arr, size, 9) << endl;
+}
+
+int countGreaterThan(int* arr, size_t size, int threshold) {
+    int count = 0;
+    for (size_t i = 0; i < size; i++)
+        if (arr[i] > threshold)
+            count++;
+    return count;
+}

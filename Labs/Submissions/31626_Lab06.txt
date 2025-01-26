@@ -1,0 +1,216 @@
+/*
+EXERCISE 1 - SELECTION SORT
+- Input numbers from the user
+- Use selection sort to sort them
+- Ascending order to be implemented
+*/
+
+#include <iostream>
+#include <array>
+using namespace std;
+
+int main() {
+    const int n = 10;
+    array<int,n> numbers;
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter item " << i+1 << ": ";
+        cin >> numbers[i];
+    }
+
+    cout << "Unsorted Values: ";
+    for (int number : numbers) {
+        cout << number << " ";
+    }
+    cout << endl;
+
+    // Selection Sort
+    for (unsigned int i = 0; i < n-1; i++) {
+        for (unsigned int j = i+1; j < n; j++) {
+            if (numbers[i] > numbers[j]) {
+                numbers[i] = numbers[i] + numbers[j];
+                numbers[j] = numbers[i] - numbers[j];
+                numbers[i] = numbers[i] - numbers[j];
+            }
+        }
+    }
+
+    cout << "Sorted Values: ";
+    for (int number : numbers) {
+        cout << number << " ";
+    }
+    cout << endl;
+}
+
+/*
+EXERCISE 2
+- Input an integer from the user
+- Display the even digits only
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+
+    cout << "Enter a number: ";
+    cin >> n;
+
+    int place = 1;
+    int result = 0;
+
+    if (n < 0) {
+        place = -1;
+        n = -n;
+    }
+
+    while (n > 0) {
+        int digit = n % 10;
+
+        if (digit % 2 == 0) {
+            result += digit * place;
+            place *= 10;
+        }
+
+        n /= 10;
+    }
+
+    cout << result << endl;
+}
+
+/*
+EXERCISE 3
+- Accept an array of integers as input
+- Return the percentage of even numbers
+
+Test cases
+- For {6,2,9,11,3} return 40.0
+- For no even inputs return 0.0
+*/
+
+#include <iostream>
+#include <array>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    const int n = 10;
+    array<int,n> numbers;
+    unsigned int even = 0;
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter value " << i+1 << ": ";
+        cin >> numbers[i];
+
+        if (numbers[i] % 2 == 0) {
+            even += 1;
+        }
+    }
+
+    cout << setprecision(1) << fixed;
+    cout << "Percentage of even values: " << static_cast<double>(even) / n * 100 << endl;
+}
+
+/*
+EXERCISE 4
+- Randomly generate 100 lowercase letters
+- Store the letters in an array of characters
+- Display the occurance of each of the letters
+*/
+
+#include <iostream>
+#include <ctime>
+#include <array>
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    const int n = 100;
+    array<char,n> characters;
+    array<int,26> counts;
+
+    // Initialize counts to 0
+    for (int& count : counts) {
+        count = 0;
+    }
+
+    // Generate and display random characters
+    cout << "Random characters: ";
+    for (int i = 0; i < n; i++) {
+        int number = rand() % 26;
+        counts[number] += 1;
+        char character = char(number+'a');
+        characters[i] = character;
+        cout << character << " ";
+    }
+    cout << endl;
+
+    // Display all character counts
+    cout << "Character counts: ";
+    for (int i = 0; i < 26; i++) {
+        cout << char(i+'a') << "=" << counts[i];
+        if (i != 25) cout << ", ";
+    }
+    cout << endl;
+}
+
+/*
+EXERCISE 5
+- Input 30 integers as grades
+- Display the grade distribution
+
+SAMPLE OUTPUT
+Grade distribution:
+  0-9:
+10-19:
+20-29:
+30-39:
+40-49:
+50-59:
+60-69: *
+70-79: **
+80-89: ****
+90-99: **
+  100: *
+*/
+
+#include <iostream>
+#include <array>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    const int n = 30;
+    array<int,n> grades{};
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter grade " << i+1 << ": ";
+        cin >> grades[i];
+
+        while (grades[i] < 0 || grades[i] > 100) {
+            cout << "Grade must be between 0 and 100, please reenter: ";
+            cin >> grades[i];
+        }
+    }
+
+    cout << endl << "Grade distribution:" << endl;
+
+    for (int i = 0; i <= 100; i += 10) {
+        if (i == 0)
+            cout << "  0-9: ";
+        else if (i == 100)
+            cout << "  100: ";
+        else
+            cout << i << "-" << i+9 << ": ";
+
+        for (int grade : grades) {
+            if (grade >= i && grade <= i+9) {
+                cout << "*";
+            }
+        }
+
+        cout << endl;
+    }
+}

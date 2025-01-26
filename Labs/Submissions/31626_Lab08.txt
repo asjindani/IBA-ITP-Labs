@@ -1,0 +1,91 @@
+/*
+EXERCISE 1
+Count of 7
+*/
+
+#include <iostream>
+using namespace std;
+
+int count7(int);
+
+int main() {
+    int number;
+    cout << "Enter a number: ";
+
+    if (cin >> number)
+        cout << "Count of 7 in " << number << " is " << count7(number) << "";
+    else
+        cout << "Invalid number entered";
+
+    cout << endl;
+}
+
+int count7(int n) {
+    int count = 0;
+    if (n < 0)
+        n *= -1;
+    while (n > 0) {
+        if (n % 10 == 7)
+            count++;
+        n /= 10;
+    }
+    return count;
+}
+
+/*
+EXERCISE 2
+Check Factors
+*/
+
+#include <iostream>
+using namespace std;
+
+bool isFactor(int, int);
+
+int main() {
+    int n1, n2;
+
+    cout << "Enter two numbers (write 'x' to exit): ";
+    while (cin >> n1 >> n2) {
+        cout << n2 << " is " << (isFactor(n1,n2) ? "" : "not ") << "a factor of " << n1 << endl;
+        cout << "Enter two numbers (write 'x' to exit): ";
+    }
+}
+
+bool isFactor(int a, int b) {
+    return a % b == 0;
+}
+
+/*
+EXERCISE 3
+Character Count
+*/
+
+#include <iostream>
+using namespace std;
+
+int charactercheck(string, char);
+
+int main() {
+    string text;
+    char character;
+    int count;
+
+    cout << "Enter some text: ";
+    getline(cin, text); // to capture entire line instead of a single word
+
+    cout << "Enter a character: ";
+    cin >> character;
+
+    count = charactercheck(text, character);
+
+    cout << "The character '" << character << "' appeared " << count << " times in the text" << endl;
+}
+
+int charactercheck(string s, char c) {
+    int count = 0;
+    for (size_t i = 0; i < s.length(); i++)
+        if (s[i] == c)
+            count += 1;
+    return count;
+}

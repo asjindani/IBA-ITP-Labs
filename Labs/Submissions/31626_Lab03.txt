@@ -1,0 +1,185 @@
+// Task 1 - Body Mass Index (BMI)
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double weight, height, bmi;
+
+    cout << "Enter your weight in kilograms:" << endl;
+    cin >> weight;
+
+    if (weight <= 0) {
+        cout << "Weight cannot be zero or less." << endl;
+        return 0; // end program
+    }
+
+    cout << "Enter your height in meters:" << endl;
+    cin >> height;
+
+    if (height <= 0) {
+        cout << "Height cannot be zero or less." << endl;
+        return 0; // end program
+    }
+
+    bmi = weight / pow(height, 2);
+
+    cout << "Your BMI is " << bmi << " kg/m^2." << endl;
+
+    cout << "It is in the ";
+
+    if (bmi < 18.5) {
+        cout << "underweight";
+    } else if (bmi < 25) {
+        cout << "normal";
+    } else if (bmi < 30) {
+        cout << "overweight";
+    } else {
+        cout << "obese";
+    }
+
+    cout << " range." << endl;
+    cout << "It assumes you are 16 or older." << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+// Task 2 - Computing Taxes
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    char status;
+    double income, tax_rate, tax_amount;
+
+    cout << "Tax Caclulator" << endl << endl
+         << "1. Single" << endl
+         << "2. Married Filing Jointly or Qualifying Widow(er)" << endl
+         << "3. Married Filing Separately" << endl
+         << "4. Head of Household" << endl << endl;
+
+    cout << "Enter your status (1/2/3/4):" << endl;
+
+    cin >> status;
+
+    if (status < '1' || status > '4') {
+        cout << "You entered an invalid status." << endl;
+        return 0; // end program
+    }
+
+    cout << endl << "Enter your annual income:" << endl;
+
+    cin >> income;
+
+    if (income < 0) {
+        cout << "You entered an invalid income." << endl;
+        return 0; // end program
+    }
+
+    if (status == '1') {
+        if (income <= 8350) {
+            tax_rate = 0.10;
+        } else if (income <= 33950) {
+            tax_rate = 0.15;
+        } else if (income <= 82250) {
+            tax_rate = 0.25;
+        } else if (income <= 171550) {
+            tax_rate = 0.28;
+        } else if (income <= 372950) {
+            tax_rate = 0.33;
+        } else {
+            tax_rate = 0.35;
+        }
+    } else if (status == '2') {
+        if (income <= 16700) {
+            tax_rate = 0.10;
+        } else if (income <= 67900) {
+            tax_rate = 0.15;
+        } else if (income <= 137050) {
+            tax_rate = 0.25;
+        } else if (income <= 208850) {
+            tax_rate = 0.28;
+        } else if (income <= 372950) {
+            tax_rate = 0.33;
+        } else {
+            tax_rate = 0.35;
+        }
+    } else if (status == '3') {
+        if (income <= 8350) {
+            tax_rate = 0.10;
+        } else if (income <= 33950) {
+            tax_rate = 0.15;
+        } else if (income <= 68525) {
+            tax_rate = 0.25;
+        } else if (income <= 104425) {
+            tax_rate = 0.28;
+        } else if (income <= 186475) {
+            tax_rate = 0.33;
+        } else {
+            tax_rate = 0.35;
+        }
+    } else if (status == '4') {
+        if (income <= 11950) {
+            tax_rate = 0.10;
+        } else if (income <= 45500) {
+            tax_rate = 0.15;
+        } else if (income <= 117450) {
+            tax_rate = 0.25;
+        } else if (income <= 190200) {
+            tax_rate = 0.28;
+        } else if (income <= 372950) {
+            tax_rate = 0.33;
+        } else {
+            tax_rate = 0.35;
+        }
+    }
+
+    tax_amount = tax_rate * income;
+
+    cout << endl << tax_rate * 100 << "% tax has been applied." << endl;
+    cout << "The tax amount will be USD " << tax_amount << "." << endl;
+    cout << "Your take-home income will be USD " << income - tax_amount << "." << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+// Task 3 - Vowels & Consonants
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    char character;
+
+    cout << "Enter character:" << endl;
+    cin >> character;
+
+    // ASCII codes for characters as decimal values
+    // 'A' is 65, 'E' is 69, 'I' is 73, 'O' is 79, 'U' is 85
+    // 'a' is 97, 'e' is 101, 'i' is 105, 'o' is 111, 'u' is 117
+
+    if (character < 65 || character > 122 || (character > 90 && character < 97)) {
+        cout << "Invalid character: not in the alphabet.";
+    } else if (character == 65 || character == 69 || character == 73 || character == 79 || character == 85 || character == 97 || character == 101 || character == 105 || character == 111 || character == 117) {
+        cout << "The character '" << character << "' is a vowel.";
+    } else {
+        cout << "The character '" << character << "' is a consonant.";
+    }
+
+    return 0;
+}

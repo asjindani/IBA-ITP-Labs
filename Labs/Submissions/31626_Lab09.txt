@@ -1,0 +1,198 @@
+/* EXERCISE 1 */
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isDudeney(int);
+
+int main() {
+    for (int i = 0; i < 200000; i++)
+        if (isDudeney(i))
+            cout << i << " ";
+    cout << endl;
+}
+
+bool isDudeney(int number) {
+    double sum = 0;
+    double root = cbrt(number);
+    if (number < 0)
+        number *= -1;
+    while (number > 0) {
+        sum += number % 10;
+        number /= 10;
+    }
+    return root == sum;
+}
+
+/* EXERCISE 2 */
+
+#include <iostream>
+using namespace std;
+
+int str_to_int(string);
+
+int main() {
+    string str;
+    cout << "Enter a number: ";
+    cin >> str;
+    cout << "String to integer result: " << str_to_int(str) << endl;
+}
+
+int str_to_int(string str) {
+    bool negative = false;
+    int index = 0;
+    int number = 0;
+    bool leadingZeros = true;
+
+    if (str[0] == '+')
+        index++;
+
+    if (str[0] == '-') {
+        negative = true;
+        index++;
+    }
+
+    while (index < str.length()) {
+        char character = str[index];
+        if (character >= '0' && character <= '9') {
+            if (character > '0')
+                leadingZeros = false;
+            if (!leadingZeros) {
+                number += character - '0';
+                number *= 10;
+            }
+        } else {
+            cout << "Error: non-alphanumeric characters found." << endl;
+            return 0;
+        }
+        index++;
+    }
+    number /= 10;
+
+    if (negative)
+        number *= -1;
+
+    return number;
+}
+
+/* EXERCISE 3 */
+
+#include <iostream>
+using namespace std;
+
+string tobinary(int, int);
+
+int main() {
+    int number;
+    
+    cout << "Enter a number between 0 and 511: ";
+    cin >> number;
+
+    if (number > 511 || number < 0) {
+        cout << "Input was out of range." << endl;
+        return 0;
+    }
+
+    string binary = tobinary(number, 9);
+
+    int k = 0;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (binary[k] == '0')
+                cout << "H ";
+            else
+                cout << "T ";
+            k++;
+        }
+        cout << endl;
+    }
+
+}
+
+string tobinary(int number, int bits=9) {
+    string binary = "";
+    for (int i = 0; i < bits; i++) {
+        binary = char(number % 2 + '0') + binary;
+        number /= 2;
+    }
+    return binary;
+}
+
+/* EXERCISE 4 */
+
+#include <iostream>
+using namespace std;
+
+int CenteredAverage(int[], int);
+
+int main() {
+    int arr[] = {5, 2, 3, 4, 100};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    cout << CenteredAverage(arr, size) << endl;
+}
+
+int CenteredAverage(int arr[], int size) {
+    int min = arr[0];
+    int max = arr[0];
+    int total = arr[0];
+
+    for (int i = 1; i < size; i++) {
+        total += arr[i];
+
+        if (arr[i] < min)
+            min = arr[i];
+        if (arr[i] > max)
+            max = arr[i];
+    }
+
+    return (total - min - max) / (size - 2);
+}
+
+/* EXERCISE 5 */
+
+#include <iostream>
+using namespace std;
+
+bool isalphanum(string);
+
+int main() {
+    string text;
+    cout << "Enter some text: ";
+    getline(cin, text);
+
+    string word = "";
+    for (int i = 0; i < text.length(); i++) {
+        char x = text[i];
+        if (x == ' ' || i == text.length()-1) {
+            if (i == text.length()-1)
+                word += x;
+
+            if (isalphanum(word))
+                cout << word << ' ';
+            word = "";
+        } else {
+            word += x;
+        }
+    }
+    cout << endl;
+}
+
+bool isalphanum(string str) {
+    int alpha = 0;
+    int num = 0;
+    bool isalpha = false;
+    bool isnum = false;
+    for (int i = 0; i < str.length(); i++) {
+        char x = str[i];
+        if ((x >= 'A' && x <= 'Z') || (x >= 'a' && x <= 'z')) {
+            isalpha = true;
+            alpha++;
+        }
+        else if (x >= '0' && x <= '9') {
+            isnum = true;
+            num++;
+        }
+    }
+    return (alpha + num == str.length()) && isalpha && isnum;
+}

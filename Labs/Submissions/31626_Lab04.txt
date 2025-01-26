@@ -1,0 +1,160 @@
+// Exercise 2 - Palindrome
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int number{0}, length{0}, n{0}, remainder{0}, reverse{0};
+
+    cout << "Enter any number:" << endl;
+    cin >> number;
+
+    if (number == 0) {
+        length = 1;
+    } else {
+        n = number;
+        while (n > 0) {
+            remainder = n%10; // return the last digit of current number
+            reverse *= 10; // create the units place to insert new digit
+            reverse += remainder; // inserts new digit to reverse number
+            n /= 10; // removes the last digit from current number
+            length++;
+        }
+    }
+
+    if (number == reverse) {
+        cout << "Palindrome";
+    } else {
+        cout << "Not Palindrome";
+    }
+
+    cout << endl;
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+// Exercise 1 - GCD
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int number1{0}, number2{0}, gcd{0};
+
+    cout << "Enter first number:" << endl;
+    cin >> number1;
+
+    cout << "Enter second number:" << endl;
+    cin >> number2;
+
+    gcd = min(number1, number2);
+
+    while (number1 % gcd != 0 || number2 % gcd != 0) {
+        gcd--;
+    }
+
+    cout << "The greatest common divisor is " << gcd << "." << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// Exercise 3 - Guess Game
+
+#include <iostream>
+#include <random>
+using namespace std;
+
+int main() {
+    int number{0}, guess{0}, count{1};
+    srand(time(0));
+
+    number = rand() % 101;
+    // cout << number << endl;
+
+    cout << "Guess a number (between 0 and 100):" << endl;
+    cin >> guess;
+
+    while (count < 5 && guess != number) {
+        if (guess < number) {
+            cout << "Your guess is lower than the number." << endl;
+        } else {
+            cout << "Your guess is higher than the number." << endl;
+        }
+        cout << "Enter a new guess:" << endl;
+        cin >> guess;
+        count++;
+    }
+
+    if (guess == number) {
+        cout << "You guessed the number " << number << " correctly." << endl;
+        cout << "You took a total of " << count << " attempts.";
+    } else {
+        cout << "You could not guess the number " << number << " in " << count << " attempts." << endl;
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Exercise 4 - Prime Numbers
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main() {
+    for (int number=2, count=0; count < 50; number++) {
+        bool prime = true;
+        for (int divisor = 2; divisor <= sqrt(number); divisor++) {
+            if (number % divisor == 0) {
+                prime = false;
+            }
+        }
+
+        if (prime) {
+            cout << setw(4);
+            cout << number << " ";
+            count++;
+
+            if (count % 10 == 0) {
+                cout << endl;
+            }
+
+        }
+    }
+    return 0;
+}

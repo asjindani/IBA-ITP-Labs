@@ -1,0 +1,143 @@
+/*
+Exercise 1
+Factorial using recursion
+*/
+
+#include <iostream>
+using namespace std;
+
+int factorial(unsigned int);
+
+int main() {
+    int number;
+    cout << "Enter a number: ";
+    cin >> number;
+    
+    if (number < 0) {
+        cout << "Number must not be negative" << endl;
+        return 0;
+    }
+
+    cout << "Factorial of " << number << " is " << factorial(number) << endl;
+}
+
+int factorial(unsigned int n) {
+    if (n == 0)
+        return 1;
+    return n * factorial(n-1);
+}
+
+/*
+Exercise 2
+Fibonacii sequence terms using recursion
+*/
+
+#include <iostream>
+using namespace std;
+
+int fibonacii(unsigned int);
+
+int main() {
+    for (int i = 1; i <= 10; i++)
+        cout << fibonacii(i) << ' ';
+    cout << endl;
+}
+
+int fibonacii(unsigned int n) {
+    if (n == 0) // invalid n
+        return 0;
+    if (n < 3)
+        return n-1;
+    return fibonacii(n-1) + fibonacii(n-2);
+}
+
+/*
+Exercise 3
+Sum of harmonic series using recursion
+*/
+
+#include <iostream>
+using namespace std;
+
+double sumTo(unsigned int);
+
+int main() {
+    int number;
+    cout << "Enter a number: ";
+    cin >> number;
+
+    if (number < 1) {
+        cout << "Number must be positive";
+        return 0;
+    }
+
+    for (int i = 1; i <= number; i++) {
+        cout << "1/" << i << " + ";
+    }
+
+    cout << "\b\b\b" << " = ";
+    cout << sumTo(number) << endl;
+}
+
+double sumTo(unsigned int n) {
+    if (n == 0)
+        return 0.0;
+    return 1.0/n + sumTo(n-1);
+}
+
+/*
+Exercise 4
+Remove letter from string using recursion
+*/
+
+#include <iostream>
+using namespace std;
+
+string removeX(string);
+
+int main() {
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);
+    cout << removeX(str) << endl;
+}
+
+string removeX(string str) {
+    if (str.length() == 0)
+        return "";
+    if (str[0] == 'x')
+        return removeX(str.substr(1));
+    return str[0] + removeX(str.substr(1));
+}
+
+/*
+Exercise 5
+Output pattern using recursion
+*/
+
+#include <iostream>
+using namespace std;
+
+void writeChars(int);
+
+int main() {
+    for (int i = 1; i <= 8; i++) {
+        cout << "writeChars(" << i << "): ";
+        writeChars(i);
+        cout << endl;
+    }
+}
+
+void writeChars(int n) {
+    if (n < 1)
+        return;
+    if (n == 1)
+        cout << "*";
+    else if (n == 2)
+        cout << "**";
+    else {
+        cout << "<";
+        writeChars(n-2);
+        cout << ">";
+    }
+}
